@@ -1,6 +1,9 @@
 package com.fom.msesoft.fomapp;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,8 +23,8 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
 
-    @ViewById(R.id.toolbar)
-    Toolbar toolbar;
+    @ViewById(R.id.loginMainGround)
+    CoordinatorLayout loginMainGround;
 
     @ViewById(R.id.input_layout_id)
     TextInputLayout inputLayoutId;
@@ -34,9 +38,14 @@ public class LoginActivity extends Activity {
     @ViewById(R.id.input_login_password)
     EditText inputLoginPassword;
 
+    @ViewById(R.id.btn_signin)
+    Button btnSingin;
+
     @Click(R.id.btn_signin)
     void btn_signin(){
-
+        for (int i = 0; i < 50000; i+=1) {
+            loginMainGround.setBackgroundColor(0xff000000 + i);
+        }
     }
 
     @AfterTextChange(R.id.input_id)
@@ -67,6 +76,7 @@ public class LoginActivity extends Activity {
         if (inputId.getText().toString().trim().isEmpty()) {
             inputLayoutId.setError(getString(R.string.err_msg_name));
             requestFocus(inputId);
+
             return false;
         } else {
             inputLayoutId.setErrorEnabled(false);

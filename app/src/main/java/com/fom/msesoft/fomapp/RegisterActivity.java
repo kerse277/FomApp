@@ -25,8 +25,6 @@ import java.lang.reflect.Field;
 public class RegisterActivity extends Activity {
 
 
-    @ViewById(R.id.toolbar)
-    Toolbar toolbar;
 
     @ViewById(R.id.input_layout_name)
     TextInputLayout inputLayoutName;
@@ -61,38 +59,8 @@ public class RegisterActivity extends Activity {
         validatePassword();
     }
 
-    @ViewById
-    FloatingActionButton floatingActionButton;
-
-    @Click(R.id.btn_signin_register)
-    void btn_signin_register(){
-        Intent intent = new Intent(this,LoginActivity_.class);
-        startActivity(intent);
-    }
-
-    @Click
-    void floatingActionButton (View view) {
-        final PopupMenu popup = new PopupMenu(RegisterActivity.this, floatingActionButton);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-        Object menuHelper;
-        Class[] argTypes;
-
-        try {
-            Field fMenuHelper = PopupMenu.class.getDeclaredField("mPopup");
-            fMenuHelper.setAccessible(true);
-            menuHelper = fMenuHelper.get(popup);
-            argTypes = new Class[] { boolean.class };
-            menuHelper.getClass().getDeclaredMethod("setForceShowIcon", argTypes).invoke(menuHelper, true);
-        } catch (Exception e) {
-
-            popup.show();
-            return;
-        }
 
 
-        popup.show();//showing popup menu
-    }
 
 
     private void submitForm() {
